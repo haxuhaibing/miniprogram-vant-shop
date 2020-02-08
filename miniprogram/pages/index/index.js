@@ -13,9 +13,6 @@ Page({
     //获取banner
     wx.request({
       url: 'https://api.it120.cc/xiaochengxu/banner/list',
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
       success: (res) => {
         this.setData({
           bannerList: res.data.data
@@ -25,9 +22,6 @@ Page({
     //获取banner
     wx.request({
       url: 'https://api.it120.cc/xiaochengxu/shop/goods/list',
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
       success: (res) => {
         let allList = res.data.data
         this.setData({

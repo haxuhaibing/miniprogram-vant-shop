@@ -1,7 +1,7 @@
 <view class="container">
   <view class="user-author">
     <image class="user-avater" src="{{userInfo.avatarUrl}}"></image>
-    <view class="user-intro" bindtap="onLogin">
+    <view class="user-intro" bindtap="Login">
       <view class="user-nickname">
         <button open-type="getUserInfo" plain="true">{{userInfo.nickName ? userInfo.nickName : "请登录"}}</button>
       </view>
