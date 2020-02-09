@@ -1,5 +1,5 @@
 //cart.js
-const WXAPI = require('../../unit/http')
+const $http = require('../../unit/http')
 const app = getApp()
 Page({
   data: {
@@ -7,6 +7,23 @@ Page({
     bing: []
   },
   onLoad: function() {
+    $http.post('/user/m/login', {
+        deviceId: '20190723',
+        deviceName: 'iphone7',
+        mobile: 13511502043,
+        pwd: 123456
+      })
+      .then(response => {
+        if (response.code == 0) {
+          wx.setStorageSync('token', response.data.token)
+          wx.setStorageSync('uid', response.data.uid)
+        }
+      })
+
+    $http.post('/user/modify')
+      .then(response => {
+        console.log(response)
+      })
 
   },
   Login: function() {
@@ -26,18 +43,11 @@ Page({
     wx.login({
       success(res) {
         let code = res.code
-        wx.request({
-          url: 'https://api.it120.cc/xuhaibing/user/wxapp/login',
-          data: {
+        $http.post('/user/wxapp/login', {
             code: code,
             type: 2
-          },
-          method: "POST",
-          header: {
-            'content-type': 'application/json'
-          },
-          success(res) {
-
+          })
+          .then(res => {
             if (res.code == 10000) {
               // 去注册
               that.Register();
@@ -54,8 +64,8 @@ Page({
             }
             wx.setStorageSync('token', res.data.token)
             wx.setStorageSync('uid', res.data.uid)
-          }
-        })
+          })
+
       }
     })
   },
@@ -68,22 +78,15 @@ Page({
           success: (res) => {
             let iv = res.iv;
             let encryptedData = res.encryptedData;
-            wx.request({
-              url: 'https://api.it120.cc/xuhaibing/user/wxapp/register/complex',
-              data: {
+            $http.post('/user/wxapp/register/complex', {
                 code: code,
                 encryptedData: encryptedData,
                 iv: iv
-              },
-              method: "POST",
-              header: {
-                'content-type': 'application/json'
-              },
-              success(res) {
+              })
+              .then(res => {
                 that.Login();
                 console.log('执行了regUser')
-              }
-            })
+              })
           }
         })
       }
