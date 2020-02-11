@@ -1,0 +1,29 @@
+<view class="container">
+  <van-tabs swipeable  active="{{active}}" bind:change="onTabs">
+    <van-tab wx:for="{{tabs}}" title="{{item.title}}" >
+      <view class="order-list">
+        <view class="order-list-item" wx:for="{{filterList}}" wx:for-item="item" wx:key="item.id">
+          <view class="order-list-item-hd">
+            <view class="sn">订单编号:{{item.orderNumber}}</view>
+            <view class="status">{{item.statusStr}}</view>
+          </view>
+          <view class="order-list-item-bd">
+            <block wx:for="{{goodsMap[item.id]}}" wx:for-item="subitem" wx:key="subitem.id">
+              <image src="{{subitem.pic}}"></image>
+              <view>
+                <view class="title">{{subitem.goodsName}}</view>
+                <view class="price">￥{{item.amount}}</view>
+              </view>
+              <view class="number">x1</view>
+            </block>
+          </view>
+          <view class="order-list-item-ft">
+            <view class="time">{{item.dateAdd}}</view>
+            <view class="total">实付:￥<text>{{item.amount}}</text></view>
+          </view>
+        </view>
+      </view>
+
+    </van-tab>
+  </van-tabs>
+</view>

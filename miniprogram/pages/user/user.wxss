@@ -38,7 +38,6 @@
 
 .user-wallet {
   background: #fff;
-  padding: 0 30rpx;
 }
 
 .user-title {
@@ -46,16 +45,19 @@
   border-bottom: 1px solid #f5f5f5;
   line-height: 70rpx;
   font-size: 28rpx;
+  padding: 0 30rpx;
 }
 
 .user-wallet-list {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0 30rpx;
 }
 
 .user-wallet-item {
   padding: 20rpx 0;
+  text-align: center;
 }
 
 .user-wallet-item text {
@@ -69,6 +71,65 @@
 }
 
 .user-wallet-item .name {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 6rpx;
+}
+
+.order-nav {
+  background: #fff;
+}
+
+.order-nav-list {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30rpx;
+}
+
+.order-nav-item {
+  padding: 20rpx 0;
+  text-align: center;
+}
+
+.order-nav-item view {
+  display: block;
+  font-size: 40rpx;
+  margin: 0 auto;
+  color: #dd9e58;
+}
+
+.order-nav-item text {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 6rpx;
+}
+
+.user-tools {
+  background: #fff;
+}
+
+.user-tools-list {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.user-tools-item {
+  padding: 20rpx 0;
+  text-align: center;
+  width: 25%;
+}
+
+.user-tools-item view {
+  display: block;
+  font-size: 40rpx;
+  margin: 0 auto;
+  color: #333;
+}
+
+.user-tools-item text {
   font-size: 24rpx;
   color: #999;
   margin-top: 6rpx;

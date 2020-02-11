@@ -1,0 +1,36 @@
+/* pages/cart/cart.wxss */
+.container{
+  height: 100%;
+}
+.cate-nav{
+  height: 100%;
+}
+.cate-nav .van-tree-select{
+  height: 100%!important;
+}
+.category-list {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.category-list-item {
+  width: 50%;
+  padding: 20rpx;
+  text-align: center;
+}
+
+.category-list-item image {
+  width: 160rpx;
+  height: 160rpx;
+  display: block;
+  margin: 0 auto;
+}
+
+.category-list-item text {
+  text-align: center;
+  font-size: 24rpx;
+  line-height: 1.4;
+  display: block;
+
+}

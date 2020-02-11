@@ -1,0 +1,37 @@
+<view class="container">
+  <swiper class="banner-slide" autoplay="true" interval="5000" duration="1000">
+    <block wx:for="{{bannerList}}" wx:key="item.id">
+      <swiper-item>
+        <image mode="widthFix" class="banner-slide-image" src="{{item.pic}}"></image>
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <view class="detail-intro mt20">
+    <view class="detail-intro-title">{{basicInfo.name}}</view>
+    <view class="detail-intro-desc">{{basicInfo.characteristic}}</view>
+    <view class="detail-intro-price">￥{{basicInfo.minPrice}}</view>
+    <view class="detail-intro-more">
+      <text>浏览:{{basicInfo.views}}</text>
+      <text>购买:{{basicInfo.numberOrders}}</text>
+      <text>好评:{{basicInfo.numberSells}}</text>
+    </view>
+  </view>
+  <view class="mt20">
+    <van-cell-group>
+      <van-cell title="领券" is-link />
+      <van-cell title="服务" is-link />
+      <van-cell title="选择" is-link />
+    </van-cell-group>
+  </view>
+  <view class="detail-content-wrap mt20">
+    <view class="headline-title">商品详情</view>
+    <rich-text class="detail-content" nodes="{{content}}"></rich-text>
+  </view>
+  <van-goods-action>
+    <van-goods-action-icon icon="chat-o" text="客服" bind:click="onClickIcon" />
+    <van-goods-action-icon icon="cart-o" text="购物车" bind:click="onClickIcon" />
+    <van-goods-action-button text="加入购物车" type="warning" bind:click="onClickButton" />
+    <van-goods-action-button text="立即购买" bind:click="onClickButton" />
+  </van-goods-action>
+</view>

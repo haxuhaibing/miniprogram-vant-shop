@@ -4,25 +4,18 @@ const app = getApp()
 Page({
   data: {
     userInfo: [],
-    bing: []
+    walletInfo: []
   },
   onLoad: function() {
-    $http.post('/user/m/login', {
-        deviceId: '20190723',
-        deviceName: 'iphone7',
-        mobile: 13511502043,
-        pwd: 123456
-      })
-      .then(response => {
-        if (response.code == 0) {
-          wx.setStorageSync('token', response.data.token)
-          wx.setStorageSync('uid', response.data.uid)
-        }
-      })
+    const TOKEN = wx.getStorageSync('token')
 
-    $http.post('/user/modify')
+
+
+    $http.post('/user/amount')
       .then(response => {
-        console.log(response)
+        this.setData({
+          walletInfo: response.data
+        })
       })
 
   },
@@ -35,8 +28,7 @@ Page({
     wx.getUserInfo({
       success: (res) => {
         this.setData({
-          userInfo: res.userInfo,
-          bing: res
+          userInfo: res.userInfo
         })
       }
     })

@@ -1,0 +1,53 @@
+/* pages/order/order.wxss */
+.container {
+  background-color: #f8f8f8;
+}
+
+.order-list-item {
+  margin-top: 20rpx;
+  background-color: #fff;
+}
+
+.order-list-item-hd {
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx 30rpx;
+  font-size: 28rpx;
+}
+
+.order-list-item-hd .status {
+  color: #f23030;
+}
+
+.order-list-item-bd {
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  background: #f8f8f8;
+  padding: 20rpx 30rpx;
+}
+
+.order-list-item-bd image {
+  width: 180rpx;
+  height: 180rpx;
+  margin-right: 30rpx;
+}
+.order-list-item-bd .price{
+  color: red;
+}
+.order-list-item-ft {
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx 30rpx;
+  font-size: 28rpx;
+}
+
+.order-list-item-ft .total text {
+  font-size: 32rpx;
+}

@@ -12,26 +12,33 @@
   <!-- 疯狂砍价 -->
   <view class="category-title" wx:if="{{miaoshaList.length>0}}">限时秒杀</view>
   <view class="category-list">
+
     <view class="category-list-item" wx:for="{{miaoshaList}}" wx:key="item.id">
-      <image src="{{item.pic}}"></image>
-      <view class="category-list-name">{{item.name}}</view>
-      <view class="category-list-price">
-        <view class="sale">￥46</view>
-        <view class="original">￥46</view>
-      </view>
+      <navigator url="../detail/detail?id=id">
+        <image src="{{item.pic}}"></image>
+        <view class="category-list-name">{{item.name}}</view>
+        <view class="category-list-price">
+          <view class="sale">￥46</view>
+          <view class="original">￥46</view>
+        </view>
+      </navigator>
     </view>
+
+
   </view>
 
   <!-- 疯狂砍价 -->
   <view class="category-title">疯狂砍价</view>
   <view class="category-list">
     <view class="category-list-item" wx:for="{{kanjiaList}}" wx:key="item.id">
-      <image src="{{item.pic}}"></image>
-      <view class="category-list-name">{{item.name}}</view>
-      <view class="category-list-price">
-        <view class="sale">￥46</view>
-        <view class="original">￥46</view>
-      </view>
+      <navigator url="../detail/detail?id={{item.id}}">
+        <image src="{{item.pic}}"></image>
+        <view class="category-list-name">{{item.name}}</view>
+        <view class="category-list-price">
+          <view class="sale">￥46</view>
+          <view class="original">￥46</view>
+        </view>
+      </navigator>
     </view>
   </view>
 
@@ -39,12 +46,14 @@
   <view class="category-title">全名拼团</view>
   <view class="category-list">
     <view class="category-list-item" wx:for="{{pintuanList}}" wx:key="item.id">
-      <image src="{{item.pic}}"></image>
-      <view class="category-list-name">{{item.name}}</view>
-      <view class="category-list-price">
-        <view class="sale">￥46</view>
-        <view class="original">￥46</view>
-      </view>
+      <navigator url="../detail/detail?id={{item.id}}">
+        <image src="{{item.pic}}"></image>
+        <view class="category-list-name">{{item.name}}</view>
+        <view class="category-list-price">
+          <view class="sale">￥46</view>
+          <view class="original">￥46</view>
+        </view>
+      </navigator>
     </view>
   </view>
 
@@ -52,12 +61,14 @@
   <view class="category-title">商品列表</view>
   <view class="category-list">
     <view class="category-list-item" wx:for="{{goodsList}}" wx:key="item.id">
-      <image src="{{item.pic}}"></image>
-      <view class="category-list-name">{{item.name}}</view>
-      <view class="category-list-price">
-        <view class="sale">￥46</view>
-        <view class="original">￥46</view>
-      </view>
+      <navigator url="../detail/detail?id={{item.id}}">
+        <image src="{{item.pic}}"></image>
+        <view class="category-list-name">{{item.name}}</view>
+        <view class="category-list-price">
+          <view class="sale">￥46</view>
+          <view class="original">￥46</view>
+        </view>
+      </navigator>
     </view>
   </view>
 </view>

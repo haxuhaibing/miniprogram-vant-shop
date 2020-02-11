@@ -1,9 +1,19 @@
 /**app.wxss**/
+@import './iconfont/iconfont.wxss';
+page{
+  height: 100%;
+}
 .container {}
 
 view {
   box-sizing: border-box;
 }
-.mt20{
+
+.mt20 {
   margin-top: 20rpx;
+}
+
+.headline-title {
+  text-align: center;
+  padding: 20rpx 0;
 }

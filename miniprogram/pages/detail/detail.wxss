@@ -1,0 +1,58 @@
+.container {
+  background: #f8f8f8;
+}
+
+.banner-slide {
+  height: 650rpx;
+  width: 100%;
+  background: #fff;
+}
+
+.banner-slide-image {
+  display: block;
+  height: 750rpx;
+  background-color: pink;
+  margin: 0 auto;
+}
+
+.detail-intro {
+  background-color: #fff;
+  padding: 30rpx;
+}
+
+.detail-intro-title {
+  font-weight: 700;
+  font-size: 40rpx;
+  margin-bottom: 10rpx;
+}
+
+.detail-intro-desc {
+  font-size: 24rpx;
+  color: #888;
+  margin-bottom: 20rpx;
+}
+
+.detail-intro-price {
+  font-size: 48rpx;
+  color: #e60012;
+  margin-top: 20rpx;
+  line-height: 1.2;
+}
+
+.detail-intro-more {
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 10rpx;
+}
+.detail-content-wrap{
+  background: #fff;
+}
+.detail-content img {
+  display: block;
+  width: 100%;
+}

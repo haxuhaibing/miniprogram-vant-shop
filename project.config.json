@@ -5,7 +5,7 @@
 		"urlCheck": true,
 		"es6": true,
 		"enhance": true,
-		"postcss": true,
+		"postcss": false,
 		"minified": true,
 		"newFeature": true,
 		"coverView": true,
@@ -18,7 +18,8 @@
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
-		}
+		},
+		"bundle": false
 	},
 	"appid": "wxd1c62f98d97abb81",
 	"projectname": "vant-shop",

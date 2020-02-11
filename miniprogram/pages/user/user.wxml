@@ -7,25 +7,95 @@
       </view>
     </view>
   </view>
+  <!-- wallet -->
   <view class="user-wallet mt20">
     <view class="user-title">我的钱包</view>
     <view class="user-wallet-list">
       <view class="user-wallet-item">
-        <text class="value">266.2</text>
-        <text class="name">可以</text>
+        <text class="value">{{walletInfo.balance}}</text>
+        <text class="name">可用余额</text>
       </view>
       <view class="user-wallet-item">
-        <text class="value">266.2</text>
-        <text class="name">可以</text>
+        <text class="value">{{walletInfo.freeze}}</text>
+        <text class="name">冻结金额</text>
       </view>
       <view class="user-wallet-item">
-        <text class="value">266.2</text>
-        <text class="name">可以</text>
+        <text class="value">{{walletInfo.score}}</text>
+        <text class="name">剩余积分</text>
       </view>
       <view class="user-wallet-item">
-        <text class="value">266.2</text>
-        <text class="name">可以</text>
+        <text class="value">{{walletInfo.totleConsumed}}</text>
+        <text class="name">累计消费</text>
       </view>
     </view>
   </view>
+  <!-- /wallet -->
+  <!-- nav -->
+  <view class="order-nav mt20">
+    <view class="order-nav-list">
+      <view class="order-nav-item">
+        <navigator url="../order/order?active=1">
+          <view class="iconfont icon-pay"></view>
+          <text>代付款</text>
+        </navigator>
+      </view>
+      <view class="order-nav-item">
+        <navigator url="../order/order?active=2">
+          <view class="iconfont icon-receive"></view>
+          <text>待收货</text>
+        </navigator>
+      </view>
+      <view class="order-nav-item">
+        <navigator url="../order/order?active=3">
+          <view class="iconfont icon-refund"></view>
+          <text>退换/售后</text>
+        </navigator>
+
+      </view>
+      <view class="order-nav-item">
+        <navigator url="../order/order?active=0">
+          <view class="iconfont icon-order"></view>
+          <text>全部订单</text>
+        </navigator>
+      </view>
+    </view>
+  </view>
+  <!-- /nav -->
+  <!-- tools -->
+  <view class="user-tools mt20">
+    <view class="user-title">我的工具</view>
+    <view class="user-tools-list">
+      <view class="user-tools-item">
+        <navigator url="../order-list/order-list">
+          <view class="iconfont icon-feiyongbaohan"></view>
+          <text>资金明细</text>
+        </navigator>
+      </view>
+      <view class="user-tools-item">
+        <navigator url="../order-list/order-list">
+          <view class="iconfont icon-shoucang"></view>
+          <text>我的收藏</text>
+        </navigator>
+      </view>
+      <view class="user-tools-item">
+        <navigator url="../order-list/order-list">
+          <view class="iconfont icon-youhuiquan"></view>
+          <text>优惠券</text>
+        </navigator>
+      </view>
+      <view class="user-tools-item">
+        <navigator url="../order-list/order-list">
+          <view class="iconfont icon-dibiao"></view>
+          <text>收货地址</text>
+        </navigator>
+      </view>
+      <view class="user-tools-item">
+        <navigator url="../order-list/order-list">
+          <view class="iconfont icon-shezhi1"></view>
+          <text>设置</text>
+        </navigator>
+      </view>
+    </view>
+  </view>
+  <!-- /tools -->
 </view>

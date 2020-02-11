@@ -1,0 +1,28 @@
+<view>
+  <view class="cart-manage">
+    <view>购物车</view>
+    <view class="operation">编辑</view>
+  </view>
+  <view class="cart-list">
+    <van-checkbox-group value="{{ checkedList }}" bind:change="onChecked">
+      <van-cell-group>
+        <van-swipe-cell right-width="{{ 65 }}">
+          <view class="cart-list-item" wx:for="{{cartList}}" wx:key="item.goodsId">
+            <van-checkbox name="{{index}}"></van-checkbox>
+            <image class="thumb" src="{{item.pic}}"></image>
+            <view class="content">
+              <view class="name">{{item.name}}</view>
+              <view class="price-stepper">
+                <view class="price">￥{{item.price}}</view>
+                <van-stepper value="{{ item.number }}" bind:change="onChange" />
+              </view>
+            </view>
+          </view>
+          <view slot="right" class="cart-list-item-del">删除</view>
+        </van-swipe-cell>
+      </van-cell-group>
+    </van-checkbox-group>
+  </view>
+  <van-submit-bar price="{{ totalPrice }}" button-text="提交订单" bind:submit="onClickButton">
+  </van-submit-bar>
+</view>

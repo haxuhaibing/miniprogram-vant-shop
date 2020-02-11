@@ -1,0 +1,15 @@
+<view class="container">
+  <van-tree-select items="{{ cateList }}" main-active-index="{{ mainActiveIndex }}" active-id="{{ activeId }}" bind:click-nav="onClickNav" bind:click-item="onClickItem" class="cate-nav">
+    <view slot="content">
+      <view class="category-list">
+        <view class="category-list-item" wx:for="{{goodsList}}">
+          <navigator url="../detail/detail?id={{item.id}}">
+            <image src="{{item.pic}}"></image>
+            <text>{{item.name}}</text>
+          </navigator>
+
+        </view>
+      </view>
+    </view>
+  </van-tree-select>
+</view>
