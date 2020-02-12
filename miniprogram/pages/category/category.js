@@ -57,6 +57,9 @@ Page({
     this.setData({
       activeId
     });
+  },
+  onBuy() {
+
   }
 
 })

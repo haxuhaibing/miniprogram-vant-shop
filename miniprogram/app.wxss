@@ -1,9 +1,14 @@
 /**app.wxss**/
 @import './iconfont/iconfont.wxss';
-page{
+
+page {
   height: 100%;
 }
-.container {}
+
+.container {
+  height: 100%;
+  background: #f8f8f8;
+}
 
 view {
   box-sizing: border-box;

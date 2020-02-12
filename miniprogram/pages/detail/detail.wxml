@@ -1,10 +1,37 @@
 <view class="container">
+  <!-- sku -->
+  <van-popup show="{{ isSku }}" position="bottom" bind:close="onHideSku">
+    <view class="detail-sku">
+      <view class="detail-sku-intro">
+        <image class="detail-sku-thumb" src="{{basicInfo.pic}}"></image>
+        <view class="detail-sku-title-price">
+          <view class="detail-sku-title">{{basicInfo.name}}</view>
+          <view class="detail-sku-price">￥{{propertiesPrice.originalPrice}}</view>
+        </view>
+      </view>
+
+      <view class="detail-sku-parameter" wx:for="{{properties}}" wx:for-index="pindex" wx:for-item="parentitem" wx:key="id">
+        <view class="detail-sku-parameter-name">{{parentitem.name}}</view>
+        <view class="detail-sku-parameter-list">
+          <text wx:for="{{parentitem.childsCurGoods}}" wx:for-index="sindex" wx:key="id" bindtap="onProperty" data-parent="{{parentitem.id}}" data-id="{{item.id}}" data-index="{{pindex}}" data-sindex="{{sindex}}" class="{{selected[pindex]==sindex ? 'active' : 'no' }}">{{item.name}}</text>
+        </view>
+      </view>
+
+      <view class="detail-sku-number">
+        <view class="number">购买数量</view>
+        <van-stepper value="{{ number }}" bind:change="onCount" />
+      </view>
+      <view class="detail-sku-button">
+        <van-button block square color="#ffb000" class="button" bindtap="onCart">加入购物车</van-button>
+        <van-button block square color="#f63515" class="button" bindtap="onBuy">确定</van-button>
+      </view>
+    </view>
+  </van-popup>
+  <!-- /sku -->
   <swiper class="banner-slide" autoplay="true" interval="5000" duration="1000">
-    <block wx:for="{{bannerList}}" wx:key="item.id">
-      <swiper-item>
-        <image mode="widthFix" class="banner-slide-image" src="{{item.pic}}"></image>
-      </swiper-item>
-    </block>
+    <swiper-item wx:for="{{bannerList}}" wx:key="id">
+      <image mode="widthFix" class="banner-slide-image" src="{{item.pic}}"></image>
+    </swiper-item>
   </swiper>
 
   <view class="detail-intro mt20">
@@ -28,10 +55,12 @@
     <view class="headline-title">商品详情</view>
     <rich-text class="detail-content" nodes="{{content}}"></rich-text>
   </view>
+
+
   <van-goods-action>
     <van-goods-action-icon icon="chat-o" text="客服" bind:click="onClickIcon" />
     <van-goods-action-icon icon="cart-o" text="购物车" bind:click="onClickIcon" />
     <van-goods-action-button text="加入购物车" type="warning" bind:click="onClickButton" />
-    <van-goods-action-button text="立即购买" bind:click="onClickButton" />
+    <van-goods-action-button text="立即购买" bind:click="onShowSku" />
   </van-goods-action>
 </view>

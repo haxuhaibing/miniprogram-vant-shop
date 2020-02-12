@@ -1,11 +1,12 @@
 {
-  "pages": ["pages/category/category",
-    "pages/index/index",
+  "pages": [    "pages/buy/buy",
     "pages/detail/detail",
+
+    "pages/category/category",
+    "pages/index/index",
     "pages/cart/cart",
     "pages/user/user",
     "pages/order/order"
-
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

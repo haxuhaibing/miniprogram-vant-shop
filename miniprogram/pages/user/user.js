@@ -8,9 +8,6 @@ Page({
   },
   onLoad: function() {
     const TOKEN = wx.getStorageSync('token')
-
-
-
     $http.post('/user/amount')
       .then(response => {
         this.setData({

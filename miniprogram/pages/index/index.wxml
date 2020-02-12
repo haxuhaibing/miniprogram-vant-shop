@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <view class="container">
   <swiper class="banner-slide" indicator-dots="true" autoplay="true" interval="5000" duration="1000">
-    <block wx:for="{{bannerList}}" wx:key="item.id">
+    <block wx:for="{{bannerList}}" wx:key="id">
       <swiper-item>
         <image mode="widthFix" class="banner-slide-image" src="{{item.picUrl}}"></image>
       </swiper-item>
@@ -13,7 +13,7 @@
   <view class="category-title" wx:if="{{miaoshaList.length>0}}">限时秒杀</view>
   <view class="category-list">
 
-    <view class="category-list-item" wx:for="{{miaoshaList}}" wx:key="item.id">
+    <view class="category-list-item" wx:for="{{miaoshaList}}" wx:key="id">
       <navigator url="../detail/detail?id=id">
         <image src="{{item.pic}}"></image>
         <view class="category-list-name">{{item.name}}</view>
@@ -30,7 +30,7 @@
   <!-- 疯狂砍价 -->
   <view class="category-title">疯狂砍价</view>
   <view class="category-list">
-    <view class="category-list-item" wx:for="{{kanjiaList}}" wx:key="item.id">
+    <view class="category-list-item" wx:for="{{kanjiaList}}" wx:key="id">
       <navigator url="../detail/detail?id={{item.id}}">
         <image src="{{item.pic}}"></image>
         <view class="category-list-name">{{item.name}}</view>
@@ -45,7 +45,7 @@
   <!-- 全名拼团 -->
   <view class="category-title">全名拼团</view>
   <view class="category-list">
-    <view class="category-list-item" wx:for="{{pintuanList}}" wx:key="item.id">
+    <view class="category-list-item" wx:for="{{pintuanList}}" wx:key="id">
       <navigator url="../detail/detail?id={{item.id}}">
         <image src="{{item.pic}}"></image>
         <view class="category-list-name">{{item.name}}</view>
@@ -60,7 +60,7 @@
   <!-- 商品列表 -->
   <view class="category-title">商品列表</view>
   <view class="category-list">
-    <view class="category-list-item" wx:for="{{goodsList}}" wx:key="item.id">
+    <view class="category-list-item" wx:for="{{goodsList}}" wx:key="id">
       <navigator url="../detail/detail?id={{item.id}}">
         <image src="{{item.pic}}"></image>
         <view class="category-list-name">{{item.name}}</view>

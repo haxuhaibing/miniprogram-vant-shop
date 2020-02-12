@@ -1,0 +1,46 @@
+<view class="container">
+  <van-popup show="{{isShowPeisong}}" bind:close="onShowPeisong" position="bottom" z-index="1000">
+    <van-picker columns="{{ peisongType }}" bind:change="onPeisong" />
+  </van-popup>
+
+  <!-- address -->
+  <view class="address-box">
+    <van-icon name="location-o" />
+    <view class="address-box-info">
+      <view class="name">
+        <text>收货人：{{addressInfo.linkMan}}</text>
+        <text>{{addressInfo.mobile}}</text>
+      </view>
+      <view class="address">收货地址：
+        {{addressInfo.provinceStr}}
+        {{addressInfo.areaStr}}
+        {{addressInfo.address}}
+      </view>
+    </view>
+    <van-icon name="arrow" />
+  </view>
+  <!-- /address -->
+
+  <view class="goods-list mt20">
+    <view class="goods-list-title">商品列表</view>
+    <view class="goods-list-item" wx:for="{{goodsList}}" wx:key="id">
+      <image src="{{item.pic}}"></image>
+      <view class="content">
+        <view class="name">{{item.name}}</view>
+        <view class="selected">{{item.propertiesPrice}}</view>
+        <view class="price">￥{{item.price}}</view>
+      </view>
+      <view class="number">x{{item.number}}</view>
+    </view>
+  </view>
+  <van-cell-group>
+    <van-cell title="配送方式" value="{{peisongText}}" is-link bindtap="onShowPeisong"/>
+    <van-field value="{{ remark }}" label="买家留言" type="textarea" placeholder="给商家留言" autosize border="{{ false }}" bind:change="onRemark" />
+  </van-cell-group>
+
+  <van-cell-group>
+    <van-cell title="商品金额" value="￥{{totalPrice}}" />
+    <van-cell title="运费" value="+{{logisticsPrice}}" />
+  </van-cell-group>
+  <van-submit-bar price="{{ totalPrice*100 }}" button-text="提交订单" bind:submit="onSubmit" />
+</view>
