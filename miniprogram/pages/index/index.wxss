@@ -41,7 +41,9 @@ page {
 
 .category-list-item image {
   width: 300rpx;
-  height: 300rpx;
+  height: 200rpx;
+  border-radius: 10rpx;
+  object-fit: cover;
 }
 
 .category-list-name {

@@ -52,7 +52,11 @@
 
 .detail-content-wrap {
   background: #fff;
+  width: 100%;
+  overflow: hidden;
 }
+
+.detail-content {}
 
 .detail-content img {
   display: block;
@@ -67,6 +71,7 @@
 .detail-sku-thumb {
   width: 180rpx;
   height: 180rpx;
+  margin-right: 20rpx;
 }
 
 .detail-sku-intro {
@@ -74,6 +79,7 @@
   display: -ms-flex;
   display: flex;
   align-items: center;
+  padding: 30rpx;
 }
 
 .detail-sku-number {
@@ -127,7 +133,264 @@
   background-color: #f7f7f7;
   font-size: 28rpx;
 }
-.detail-sku-parameter-list .active{
+
+.detail-sku-parameter-list .active {
   background: red;
   color: #fff;
+}
+
+.detail-pintuan-count-down {
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(180deg, #ff4639, #ff703d);
+  padding: 0 30rpx;
+  color: #fff;
+}
+
+.detail-pintuan-count-down .title {
+  font-size: 36rpx;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.detail-pintuan-count-down .count-title {
+  font-size: 24rpx;
+}
+
+.detail-pintuan-count-down .van-count-down {
+  font-size: 24rpx;
+  color: #fff;
+}
+
+.pintuan-price {}
+
+.pintuan-price-persion {
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  align-items: center;
+}
+
+.pintuan-price-persion .price {
+  font-size: 48rpx;
+  color: #f44;
+  color: #ee0a24;
+}
+
+.pintuan-price-persion .persion {
+  color: #ee0a24;
+  border: 1px solid #ee0a24;
+  margin-left: 20rpx;
+  font-size: 24rpx;
+  padding: 0 10rpx;
+}
+
+.pintuan-original-price {
+  color: #999;
+  font-size: 24rpx;
+  text-decoration: line-through;
+}
+
+.pintuan-rule {
+  background-color: #fffbe8;
+  padding: 20rpx 30rpx;
+}
+
+.pintuan-rule .hd {
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pintuan-rule .name {
+  color: #ed6a0c;
+}
+
+.pintuan-rule .detail {
+  color: #999;
+  font-size: 24rpx;
+}
+
+.pintuan-rule .bd {
+  color: #999;
+  font-size: 24rpx;
+  margin-top: 10rpx;
+}
+
+.goods-evaluate {
+  background: #fff;
+}
+
+.goods-evaluate-item {
+  border-bottom: 1px solid #f7f7f7;
+  padding: 20rpx 0;
+  margin: 0 30rpx;
+}
+
+.goods-evaluate-item .hd {
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.goods-evaluate-item .hd image {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+}
+
+.goods-evaluate-item .bd {
+  margin-top: 20rpx;
+}
+
+.goods-evaluate-item .nickname {
+  flex: 1;
+  margin-left: 20rpx;
+}
+
+.goods-evaluate-item .remark {
+  font-size: 28rpx;
+  color: #999;
+  margin-top: 10rpx;
+}
+
+.goods-evaluate-item .property {
+  font-size: 28rpx;
+  color: #999;
+}
+
+.coupons-list {
+  padding: 30rpx;
+  padding-bottom: 10rpx;
+}
+
+.coupons-list-item {
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fee;
+  padding: 20rpx;
+  color: #ff4b52;
+  font-size: 24rpx;
+  border-radius: 10rpx;
+  margin-bottom: 20rpx;
+}
+
+.coupons-list-item .price {
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  align-items: center;
+}
+
+.coupons-list-item .price view {
+  font-weight: 700;
+  font-size: 30rpx;
+}
+
+.coupons-list-item .threshold {}
+
+.coupons-list-item .bd {
+  flex: 1;
+  margin-left: 30rpx;
+}
+
+.coupons-list-item .btn {
+  border: 1px solid #ff4b52;
+  background: #fff;
+  padding: 4rpx 10rpx;
+}
+
+.pindan-participation {
+  background-color: #fff;
+}
+
+.pindan-participation-title {
+  padding: 20rpx 0;
+  margin: 0 30rpx;
+  border-bottom: 1px solid #f8f8f8;
+}
+
+.pindan-participation-item {
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  align-items: center;
+}
+
+.pindan-participation-item .hd {
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  align-items: center;
+}
+
+.pindan-participation-item .hd image {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  background-color: #eee;
+  margin-right: 20rpx;
+}
+
+.pindan-participation-item .hd text {
+  font-size: 24rpx;
+}
+
+.pindan-participation-item {
+  padding: 30rpx;
+}
+
+.pindan-participation-item .bd {
+  flex: 1;
+  text-align: right;
+  padding-right: 30rpx;
+  font-size: 28rpx;
+  justify-content: flex-end;
+}
+
+.pindan-participation-item .persion text {
+  color: #ff6535;
+}
+
+.pindan-participation-item .residue {
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.pindan-participation-item .ft .btn {
+  background-color: #ff6535;
+  color: #fff;
+  border-radius: 50rpx;
+  height: 60rpx;
+  padding: 0 30rpx;
+  line-height: 60rpx;
+}
+
+.detail-sku-pintuan .pintuan-price {
+  color: red;
+  font-size: 28rpx;
+}
+
+.detail-sku-pintuan .pintuan-price text {
+  font-size: 32rpx;
+}
+
+.detail-sku-pintuan .original-price {
+  text-decoration: line-through;
+  font-size: 28rpx;
+  color: #999;
+  margin-top: 10rpx;
 }

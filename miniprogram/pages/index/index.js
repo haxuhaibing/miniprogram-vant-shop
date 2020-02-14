@@ -1,37 +1,34 @@
 //index.js
 const app = getApp()
-
+const $http = require('../../unit/http')
 Page({
   data: {
     bannerList: [],
     kanjiaList: [],
     pintuanList: [],
     goodsList: [],
-    miaoshaList:[]
+    miaoshaList: []
   },
   onLoad: function() {
     //获取banner
-    wx.request({
-      url: 'https://api.it120.cc/xiaochengxu/banner/list',
-      success: (res) => {
+    $http.get('/banner/list')
+      .then(response => {
         this.setData({
-          bannerList: res.data.data
+          bannerList: response.data
         })
-      }
-    })
+      })
     //获取banner
-    wx.request({
-      url: 'https://api.it120.cc/xiaochengxu/shop/goods/list',
-      success: (res) => {
-        let allList = res.data.data
+    $http.post('/shop/goods/list')
+      .then(response => {
+        console.log(response)
+        let allList = response.data
         this.setData({
-          miaoshaList:allList.filter(item => item.miaosha),
+          miaoshaList: allList.filter(item => item.miaosha),
           kanjiaList: allList.filter(item => item.kanjia && !item.pingtuan),
           pintuanList: allList.filter(item => item.pingtuan),
           goodsList: allList.filter(item => !item.kanjia && !item.pingtuan)
         })
-      }
-    })
+      })
   }
 
 })

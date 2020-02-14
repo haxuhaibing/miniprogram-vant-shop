@@ -1,4 +1,4 @@
-const BASE_URL = 'https://api.it120.cc/xiaochengxu'
+const BASE_URL = 'https://api.it120.cc/wxapi'
 const TOKEN = wx.getStorageSync('token')
 const post = (url, data = {}) => {
   let _url = BASE_URL + url

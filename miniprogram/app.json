@@ -1,11 +1,15 @@
 {
-  "pages": [    "pages/buy/buy",
-    "pages/detail/detail",
+  "pages": [         "pages/detail/detail",   "pages/index/index",
+     "pages/user/user",
+
+
+     "pages/buy/buy",
+
 
     "pages/category/category",
-    "pages/index/index",
+
     "pages/cart/cart",
-    "pages/user/user",
+
     "pages/order/order"
   ],
   "window": {

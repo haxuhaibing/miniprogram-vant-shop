@@ -1,4 +1,96 @@
 <view class="container">
+
+  <!-- swiper -->
+  <swiper class="banner-slide" autoplay="true" interval="5000" duration="1000">
+    <swiper-item wx:for="{{bannerList}}" wx:key="id">
+      <image mode="widthFix" class="banner-slide-image" src="{{item.pic}}"></image>
+    </swiper-item>
+  </swiper>
+  <!-- /swiper -->
+  <!-- pintuan -->
+  <view class="detail-pintuan-count-down" wx:if="{{basicInfo.pingtuan && time>0}}">
+    <view class="title">拼团</view>
+    <view class="count-down">
+      <text class="count-title">距结束仅剩</text>
+      <van-count-down time="{{ time }}" bind:finish="onFinishedTime" format="DD 天 HH 时 mm 分 ss 秒" />
+    </view>
+  </view>
+  <!-- /pintuan -->
+
+  <view class="detail-intro mt20">
+    <view class="detail-intro-title">{{basicInfo.name}}</view>
+    <view class="detail-intro-desc">{{basicInfo.characteristic}}</view>
+    <view class="pintuan-price" wx:if="{{basicInfo.pingtuan && time>0}}">
+      <view class="pintuan-price-persion">
+        <view class="price">￥{{basicInfo.pingtuanPrice}}</view>
+        <view class="persion">{{pintuanInfo.numberPersion}}人拼团价</view>
+      </view>
+      <view class="pintuan-original-price">
+        ￥{{basicInfo.originalPrice}}
+      </view>
+    </view>
+    <view class="detail-intro-price" wx:else>￥{{basicInfo.minPrice}}</view>
+    <view class="detail-intro-more">
+      <text>浏览:{{basicInfo.views}}</text>
+      <text>购买:{{basicInfo.numberOrders}}</text>
+      <text>好评:{{basicInfo.numberSells}}</text>
+    </view>
+  </view>
+  <view class="pintuan-rule mt20">
+    <navigator>
+      <view class="hd">
+        <view class="name">[多人拼团]</view>
+        <view class="detail">玩法详情</view>
+      </view>
+    </navigator>
+    <view class="bd">支付开团邀请一人成团，人数不足自动退款。</view>
+  </view>
+  <view class="pindan-participation mt20">
+    <view class="pindan-participation-title">1人在拼单，可直接参与</view>
+    <view class="pindan-participation-item">
+      <view class="hd">
+        <image></image>
+        <text>jjs</text>
+      </view>
+      <view class="bd">
+        <view class="persion">还差<text>1</text>人拼成</view>
+        <view class="residue">剩余
+          <van-count-down time="{{ time }}" />
+        </view>
+      </view>
+      <view class="ft">
+        <view class="btn">去拼单</view>
+      </view>
+    </view>
+  </view>
+  <view class="mt20">
+    <van-cell-group>
+      <van-cell title="领券" is-link bind:click="onIsCoupons" wx:if="{{couponsList.length>0}}" />
+      <van-cell title="服务" is-link />
+      <van-cell title="选择" is-link />
+    </van-cell-group>
+  </view>
+  <view class="goods-evaluate mt20">
+    <van-cell title="评价({{evaluateList.length}})" value="全部内容" is-link link-type="navigateTo" url="/pages/buy/buy" />
+    <view class="goods-evaluate-list">
+      <view class="goods-evaluate-item" wx:for="{{evaluateList}}" wx:key="id">
+        <div class="hd">
+          <image src="{{item.user.avatarUrl}}"></image>
+          <view class="nickname">{{item.user.nick}}</view>
+          <van-rate value="{{ item.goods.goodReputation }}" icon="star" void-icon="star-o" bind:change="onChange" />
+        </div>
+        <div class="bd">
+          <view class="remark">{{ item.goods.goodReputationRemark }}</view>
+          <view class="property">{{ item.goods.property }}</view>
+        </div>
+      </view>
+    </view>
+  </view>
+  <view class="detail-content-wrap mt20">
+    <view class="headline-title">商品详情</view>
+    <rich-text class="detail-content" nodes="{{content}}"></rich-text>
+  </view>
+
   <!-- sku -->
   <van-popup show="{{ isSku }}" position="bottom" bind:close="onHideSku">
     <view class="detail-sku">
@@ -6,17 +98,23 @@
         <image class="detail-sku-thumb" src="{{basicInfo.pic}}"></image>
         <view class="detail-sku-title-price">
           <view class="detail-sku-title">{{basicInfo.name}}</view>
-          <view class="detail-sku-price">￥{{propertiesPrice.originalPrice}}</view>
+          <view class="detail-sku-pintuan" wx:if="{{isPintuan}}">
+            <view class="pintuan-price">
+              拼团价￥<text>{{propertiesPrice.pingtuanPrice}}</text>
+            </view>
+            <view class="original-price">
+              ￥{{propertiesPrice.originalPrice}}
+            </view>
+          </view>
+          <view wx:else class="detail-sku-price">￥{{propertiesPrice.originalPrice}}</view>
         </view>
       </view>
-
       <view class="detail-sku-parameter" wx:for="{{properties}}" wx:for-index="pindex" wx:for-item="parentitem" wx:key="id">
         <view class="detail-sku-parameter-name">{{parentitem.name}}</view>
         <view class="detail-sku-parameter-list">
           <text wx:for="{{parentitem.childsCurGoods}}" wx:for-index="sindex" wx:key="id" bindtap="onProperty" data-parent="{{parentitem.id}}" data-id="{{item.id}}" data-index="{{pindex}}" data-sindex="{{sindex}}" class="{{selected[pindex]==sindex ? 'active' : 'no' }}">{{item.name}}</text>
         </view>
       </view>
-
       <view class="detail-sku-number">
         <view class="number">购买数量</view>
         <van-stepper value="{{ number }}" bind:change="onCount" />
@@ -28,39 +126,38 @@
     </view>
   </van-popup>
   <!-- /sku -->
-  <swiper class="banner-slide" autoplay="true" interval="5000" duration="1000">
-    <swiper-item wx:for="{{bannerList}}" wx:key="id">
-      <image mode="widthFix" class="banner-slide-image" src="{{item.pic}}"></image>
-    </swiper-item>
-  </swiper>
-
-  <view class="detail-intro mt20">
-    <view class="detail-intro-title">{{basicInfo.name}}</view>
-    <view class="detail-intro-desc">{{basicInfo.characteristic}}</view>
-    <view class="detail-intro-price">￥{{basicInfo.minPrice}}</view>
-    <view class="detail-intro-more">
-      <text>浏览:{{basicInfo.views}}</text>
-      <text>购买:{{basicInfo.numberOrders}}</text>
-      <text>好评:{{basicInfo.numberSells}}</text>
+  <!-- 领取优惠券 -->
+  <van-popup position="bottom" show="{{ isCoupons }}" bind:close="onIsCoupons">
+    <view class="coupons-list">
+      <view class="coupons-list-item" wx:for="{{couponsList}}" wx:key="id">
+        <view class="hd">
+          <view class="price">￥<view>{{item.moneyMax}}</view>
+          </view>
+          <view class="threshold">{{item.name}}</view>
+        </view>
+        <div class="bd">
+          <view>{{item.moneyMax}}元券</view>
+          <view>领取后{{item.dateEndDays}}天有效</view>
+        </div>
+        <view class="ft">
+          <view class="btn" data-id="{{item.id}}" bindtap="onPullCoupons">立即领取</view>
+        </view>
+      </view>
     </view>
-  </view>
-  <view class="mt20">
-    <van-cell-group>
-      <van-cell title="领券" is-link />
-      <van-cell title="服务" is-link />
-      <van-cell title="选择" is-link />
-    </van-cell-group>
-  </view>
-  <view class="detail-content-wrap mt20">
-    <view class="headline-title">商品详情</view>
-    <rich-text class="detail-content" nodes="{{content}}"></rich-text>
-  </view>
-
-
-  <van-goods-action>
+  </van-popup>
+  <!-- /领取优惠券 -->
+  <!-- 商品导航 -->
+  <van-goods-action wx:if="{{basicInfo.pingtuan}}">
+    <van-goods-action-icon icon="chat-o" text="客服" bind:click="onClickIcon" />
+    <van-goods-action-icon icon="cart-o" text="购物车" bind:click="onClickIcon" />
+    <van-goods-action-button text="￥{{propertiesPrice.originalPrice}}单独购买" type="warning" bind:click="onShowSku" />
+    <van-goods-action-button text="￥{{propertiesPrice.pingtuanPrice}}拼团购买" bind:click="onPintuanSku" />
+  </van-goods-action>
+  <van-goods-action wx:else>
     <van-goods-action-icon icon="chat-o" text="客服" bind:click="onClickIcon" />
     <van-goods-action-icon icon="cart-o" text="购物车" bind:click="onClickIcon" />
     <van-goods-action-button text="加入购物车" type="warning" bind:click="onClickButton" />
     <van-goods-action-button text="立即购买" bind:click="onShowSku" />
   </van-goods-action>
+  <!-- /商品导航 -->
 </view>
