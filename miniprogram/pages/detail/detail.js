@@ -89,7 +89,8 @@ Page({
       number: value.detail
     })
   },
-  onBuy() {
+  //提交订单
+  onCreateOrder() {
     let data = {}
     data.goodsJsonStr = [{
       "goodsId": this.data.basicInfo.id,
@@ -103,15 +104,9 @@ Page({
       "pic": this.data.basicInfo.pic,
       "name": this.data.basicInfo.name,
       "number": this.data.number,
-      "propertiesPrice": this.data.propertiesPrice.propertyChildNames,
-      "price": this.data.propertiesPrice.originalPrice
+      "propertiesPrice": this.data.propertiesPrice
     }];
     data.logistics = this.data.logistics;
-    //获取拼团id
-    let pingtuanOpenId = 0;
-    if (pingtuanOpenId) {
-
-    }
     wx.setStorageSync('creatOrder', data)
     wx.navigateTo({
       url: '../buy/buy'

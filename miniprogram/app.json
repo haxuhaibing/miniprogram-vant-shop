@@ -1,21 +1,18 @@
 {
-  "pages": [         "pages/detail/detail",   "pages/index/index",
-     "pages/user/user",
-
-
-     "pages/buy/buy",
-
+  "pages": [    "pages/buy/buy",
+    "pages/address/address",
+    "pages/detail/detail",
+    "pages/index/index",
+    "pages/user/user",
 
     "pages/category/category",
-
     "pages/cart/cart",
-
     "pages/order/order"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "首页",
     "navigationBarTextStyle": "black"
   },

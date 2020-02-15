@@ -1,0 +1,12 @@
+{
+  "usingComponents": {
+    "van-cell": "/miniprogram_npm/@vant/weapp/cell/index",
+    "van-cell-group": "/miniprogram_npm/@vant/weapp/cell-group/index",
+    "van-field": "/miniprogram_npm/@vant/weapp/field/index",
+    "van-popup": "/miniprogram_npm/@vant/weapp/popup/index",
+    "van-area": "/miniprogram_npm/@vant/weapp/area/index",
+    "van-switch": "/miniprogram_npm/@vant/weapp/switch/index",
+    "van-button": "/miniprogram_npm/@vant/weapp/button/index"
+  },
+  "navigationBarTitleText": "配送地址"
+}

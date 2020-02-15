@@ -30,7 +30,7 @@ Page({
     //计算合计
     let totalPrice = 0;
     for (let item of this.data.goodsList) {
-      totalPrice += item.price * item.number
+      totalPrice += item.propertiesPrice.price * item.number
     }
     this.setData({
       totalPrice: totalPrice

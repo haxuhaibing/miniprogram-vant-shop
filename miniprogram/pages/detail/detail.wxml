@@ -121,7 +121,7 @@
       </view>
       <view class="detail-sku-button">
         <van-button block square color="#ffb000" class="button" bindtap="onCart">加入购物车</van-button>
-        <van-button block square color="#f63515" class="button" bindtap="onBuy">确定</van-button>
+        <van-button block square color="#f63515" class="button" bindtap="onCreateOrder">确定</van-button>
       </view>
     </view>
   </van-popup>

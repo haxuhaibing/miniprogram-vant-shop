@@ -1,0 +1,21 @@
+<view class="container">
+  <van-cell-group>
+    <van-field value="{{linkMan}}" clearable label="收货人" placeholder="请输入收货人" />
+    <van-field value="{{mobile}}" clearable label="手机号" placeholder="请输入手机号" />
+    <van-cell title="地区" is-link value="{{selectedStrArea}}" arrow-direction="down" bind:click="isArea" />
+    <van-field value="{{ address }}" label="详细地址" type="textarea" placeholder="街道、具体门牌号等" autosize  />
+    <van-field value="{{code}}" clearable label="邮政编码" placeholder="请输入邮政编码" />
+    <van-cell title="设为默认收货地址" border="{{ false }}">
+      <view slot="right-icon">
+        <van-switch checked="{{ isDefault }}" active-color="#f44" bind:change="onDefaultAddress" />
+      </view>
+    </van-cell>
+  </van-cell-group>
+  <view class="address-operation ">
+    <van-button type="primary" size="large" block color="#f44" bind:click="onSave">保存</van-button>
+    <van-button type="default" size="large" block class="mt20">删除</van-button>
+  </view>
+  <van-popup show="{{ isArea }}" position="bottom">
+    <van-area area-list="{{ areaList }}" bind:close="isArea" bind:change="onAreaChange" bind:confirm="onAreaConfirm" />
+  </van-popup>
+</view>
