@@ -16,6 +16,11 @@
   justify-content: space-between;
   padding: 20rpx 30rpx;
   font-size: 28rpx;
+  border-bottom: 1px solid #f9f9f9;
+}
+
+.order-list-item-hd .sn {
+  color: #666;
 }
 
 .order-list-item-hd .status {
@@ -26,8 +31,12 @@
   display: -webkit-flex;
   display: -ms-flex;
   display: flex;
-  background: #f8f8f8;
   padding: 20rpx 30rpx;
+  border-bottom: 1px solid #f9f9f9;
+}
+
+.order-list-item-bd .wrap {
+  flex: 1;
 }
 
 .order-list-item-bd image {
@@ -35,9 +44,31 @@
   height: 180rpx;
   margin-right: 30rpx;
 }
-.order-list-item-bd .price{
-  color: red;
+
+.order-list-item-bd .thumb {
+  position: relative;
 }
+
+.order-list-item-bd .thumb .van-tag {
+  position: absolute;
+}
+
+.order-list-item-bd .property {
+  font-size: 24rpx;
+  color: #666;
+  margin-top: 10rpx;
+}
+
+.order-list-item-bd .price {
+  color: #333;
+  font-size: 24rpx;
+  margin-top: 10rpx;
+}
+
+.order-list-item-bd .number {
+  color: #666;
+}
+
 .order-list-item-ft {
   display: -webkit-flex;
   display: -ms-flex;
@@ -46,8 +77,45 @@
   justify-content: space-between;
   padding: 20rpx 30rpx;
   font-size: 28rpx;
+  border-bottom: 1px solid #f9f9f9;
+}
+
+.order-list-item-ft .time {
+  color: #666;
 }
 
 .order-list-item-ft .total text {
   font-size: 32rpx;
+  color: red;
+}
+
+.order-list-operation {
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 20rpx 30rpx;
+}
+
+.order-list-operation view {
+  border-radius: 10rpx;
+  height: 70rpx;
+  line-height: 66rpx;
+  min-width: 200rpx;
+  font-size: 28rpx;
+  text-align: center;
+  background: #fff;
+  padding: 0 30rpx;
+}
+
+.order-list-operation .btn-cancel {
+  border: 2rpx solid #b0b0b0;
+  color: #000;
+}
+
+.order-list-operation .btn-pay {
+  border: 2rpx solid #f44;
+  color: #f44;
+  margin-left: 30rpx;
 }

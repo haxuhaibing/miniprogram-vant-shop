@@ -1,13 +1,14 @@
 {
-  "pages": [    "pages/buy/buy",
-    "pages/address/address",
+  "pages": [   "pages/index/index", "pages/order/order",    
     "pages/detail/detail",
-    "pages/index/index",
-    "pages/user/user",
+    "pages/buy/buy",
 
+
+    "pages/address/address",
+    "pages/user/user",
     "pages/category/category",
-    "pages/cart/cart",
-    "pages/order/order"
+    "pages/cart/cart"
+
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

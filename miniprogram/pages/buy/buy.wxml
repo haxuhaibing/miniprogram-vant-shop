@@ -26,12 +26,13 @@
     <view class="goods-list-item" wx:for="{{goodsList}}" wx:key="id">
       <view class="goods">
         <view class="thumb">
+          <van-tag mark type="danger">{{item.propertiesPrice.pingtuanPrice>0 ? '拼团' : ''}}</van-tag>
           <image src="{{item.pic}}"></image>
         </view>
         <view class="content">
           <view class="name">{{item.name}}</view>
           <view class="selected">{{item.propertiesPrice.propertyChildNames}}</view>
-          <view class="price">￥{{item.propertiesPrice.price}}</view>
+          <view class="price">￥{{item.price}}</view>
         </view>
       </view>
       <view class="number">

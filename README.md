@@ -1,6 +1,4 @@
-# 小程序商城
-
-## 参考文档
-
-- [云开发文档](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/basis/getting-started.html)
-
+# 商城(小程序版)
+一个前端基于微信小程序，后端使用api工厂免费接口
+## 联系我
+邮箱：hi@xuhaibing.com

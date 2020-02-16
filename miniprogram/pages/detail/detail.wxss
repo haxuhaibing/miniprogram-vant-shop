@@ -394,3 +394,6 @@
   color: #999;
   margin-top: 10rpx;
 }
+.pindan-participation-item{
+  border-bottom: 1px solid #f8f8f8;
+}

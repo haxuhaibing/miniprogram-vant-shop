@@ -8,63 +8,67 @@ Page({
     basicInfo: [],
     properties: [],
     propertyChildIds: [],
-    content: '',
+    pintuanInfo: {},
     isSku: false,
     number: 1,
     selected: [],
     propertiesPrice: [],
     logistics: [],
-    time: '',
+    time: 0,
     pintuanInfo: [],
     couponsList: [],
     isCoupons: false,
     pintuanId: '',
-    isPintuan: false
+    isPintuan: false,
+    pintuanList: [],
+    pintuanJoiner: []
   },
   onLoad: function(options) {
     let id = options.id;
-    id = 267890;
+    id = 267889; //测试
     $http.get('/shop/goods/detail', {
         id: id
       })
       .then(response => {
-        console.log(response)
+        console.log('获取商品详情', response)
+        let basicInfo = response.data.basicInfo;
+        basicInfo.content = response.data.content.replace(/\<img/gi, '<img style="max-width:100%;height:auto;display:block;"');
         if (response.code == 0) {
           this.setData({
-            bannerList: response.data.pics,
-            basicInfo: response.data.basicInfo,
-            content: response.data.content,
-            properties: response.data.properties,
-            logistics: response.data.logistics
+            bannerList: response.data.pics || [],
+            basicInfo: basicInfo || {},
+            properties: response.data.properties || [],
+            logistics: response.data.logistics || {}
           })
-
-          //获取
-          let propertyChildIds = [];
-          let selected = [];
-          for (let a of this.data.properties) {
-            propertyChildIds.push(a.id + ':' + a.childsCurGoods[0].id);
-            selected.push(0)
+          //is have property
+          if (response.properties) {
+            let propertyChildIds = [];
+            let selected = [];
+            for (let a of this.data.properties) {
+              propertyChildIds.push(a.id + ':' + a.childsCurGoods[0].id);
+              selected.push(0)
+            }
+            this.setData({
+              propertyChildIds,
+              selected
+            })
+            //get property list
+            this.getPropertiesPrice();
           }
-          this.setData({
-            propertyChildIds,
-            selected
-          })
-          //获取多规格价钱
-          this.getPropertiesPrice();
         }
-        //发起拼团
-        this.originatePintuan();
-        //拼团
+        //isPintuan
         if (this.data.basicInfo.pingtuan) {
+          //发起拼团
+          this.originatePintuan();
+          //拼团
           this.getPingtuan();
+          //获取可参与拼单列表
+          this.getPindanJoinList();
         }
-        //评价
+        //get evaluate
         this.getEvaluate();
-        //优惠券
+        //get coupons
         this.getCoupons();
-        //
-        this.getPindanPersion();
-
       })
   },
   onShowSku() {
@@ -87,29 +91,6 @@ Page({
   onCount(value) {
     this.setData({
       number: value.detail
-    })
-  },
-  //提交订单
-  onCreateOrder() {
-    let data = {}
-    data.goodsJsonStr = [{
-      "goodsId": this.data.basicInfo.id,
-      "number": this.data.number,
-      "propertyChildIds": this.data.propertyChildIds.join(","),
-      "logisticsType": 0,
-      "inviter_id": '',
-      "days": [this.data.basicInfo.dateAdd, this.data.basicInfo.dateUpdate]
-    }];
-    data.goodsList = [{
-      "pic": this.data.basicInfo.pic,
-      "name": this.data.basicInfo.name,
-      "number": this.data.number,
-      "propertiesPrice": this.data.propertiesPrice
-    }];
-    data.logistics = this.data.logistics;
-    wx.setStorageSync('creatOrder', data)
-    wx.navigateTo({
-      url: '../buy/buy'
     })
   },
   onProperty(event) {
@@ -171,6 +152,7 @@ Page({
         //refId: this.data.basicInfo.id
       })
       .then(response => {
+        console.log('获取优惠券列表', response)
         if (response.code == 700) {
           this.setData({
             couponsList: []
@@ -211,6 +193,7 @@ Page({
         }
       })
   },
+  //获取评价
   getEvaluate() {
     $http.post('/shop/goods/reputation', {
         goodsId: this.data.basicInfo.id,
@@ -218,32 +201,40 @@ Page({
         pageSize: 10
       })
       .then(response => {
-        //console.log(response)
-        if (response.code !== 0) {
-          // this.$toast(res.msg)
-          return;
+        console.log('获取评价', response)
+        if (response.code == 0) {
+          this.setData({
+            evaluateList: response.data
+          })
         }
-        this.setData({
-          evaluateList: response.data
-        })
+
       })
   },
-  getPindanPersion() {
+  //获取可参与拼单列表
+  getPindanJoinList() {
     $http.post('/shop/goods/pingtuan/list/v2', {
-        goodsId: this.data.basicInfo.id,
-        page: 1,
-        pageSize: 1
+        goodsId: this.data.basicInfo.id
       })
       .then(response => {
-        console.log(response)
+        let data = response.data.result;
+        data = data.map(item => {
+          return {
+            "apiExtUser": item.apiExtUser,
+            "time": new Date(item.dateEnd).getTime() - new Date(item.dateAdd).getTime(),
+            "goodsId": item.goodsId,
+            "helpNumber": item.helpNumber,
+            "id": item.id,
+            "pingtuanId": item.pingtuanId,
+            "status": item.status,
+            "statusStr": item.statusStr,
+            "uid": item.uid
+          }
+        })
+        this.setData({
+          pintuanList: data
+        })
       })
 
-    $http.get('/shop/goods/pingtuan/joiner', {
-        tuanId: '8610'
-      })
-      .then(response => {
-        console.log(response)
-      })
   },
   //发起拼团
   originatePintuan() {
@@ -251,10 +242,52 @@ Page({
         goodsId: this.data.basicInfo.id
       })
       .then(response => {
-        console.log(response)
+        console.log('发起拼团', response)
         this.setData({
-          pintuanId: response.data.pingtuanId
+          pintuanId: response.data.id
         })
       })
+  },
+  //提交订单
+  onCreateOrder() {
+    let data = {}
+    data.goodsJsonStr = [{
+      "goodsId": this.data.basicInfo.id,
+      "number": this.data.number,
+      "propertyChildIds": this.data.propertyChildIds.join(","),
+      "logisticsType": 0,
+      "inviter_id": ''
+    }];
+    if (this.data.basicInfo.pingtuan) {
+      data.goodsList = [{
+        "pic": this.data.basicInfo.pic,
+        "name": this.data.basicInfo.name,
+        "number": this.data.number,
+        "propertiesPrice": this.data.propertiesPrice || []
+      }];
+    } else {
+      data.goodsList = [{
+        "pic": this.data.basicInfo.pic,
+        "name": this.data.basicInfo.name,
+        "number": this.data.number,
+        "price": this.data.basicInfo.minPrice
+      }];
+    }
+    //商品基本信息
+    data.basicInfo = this.data.basicInfo;
+    data.basicInfo.number = this.data.number
+    //物流信息
+    data.logistics = this.data.logistics;
+    //团购订单
+    if (this.data.isPintuan) {
+      data.pintuanId = this.data.pintuanId;
+    }
+    wx.setStorageSync('creatOrder', data);
+    this.setData({
+      isSku: false
+    })
+    wx.navigateTo({
+      url: '../buy/buy'
+    })
   }
 })

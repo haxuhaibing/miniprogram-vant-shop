@@ -7,7 +7,8 @@
     "van-field": "/miniprogram_npm/@vant/weapp/field/index",
     "van-picker": "/miniprogram_npm/@vant/weapp/picker/index",
     "van-popup": "/miniprogram_npm/@vant/weapp/popup/index",
-    "van-stepper": "/miniprogram_npm/@vant/weapp/stepper/index"
+    "van-stepper": "/miniprogram_npm/@vant/weapp/stepper/index",
+    "van-tag":"/miniprogram_npm/@vant/weapp/tag/index"
   },
   "navigationBarTitleText": "确定订单"
 }

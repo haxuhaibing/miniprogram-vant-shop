@@ -1,17 +1,22 @@
 <view class="container">
-  <van-tabs swipeable  active="{{active}}" bind:change="onTabs">
-    <van-tab wx:for="{{tabs}}" title="{{item.title}}" >
+  <van-tabs swipeable active="{{active}}" bind:change="onTabs">
+    <van-tab wx:for="{{tabs}}" title="{{item.title}}" wx:key="id">
       <view class="order-list">
-        <view class="order-list-item" wx:for="{{filterList}}" wx:for-item="item" wx:key="item.id">
+        <view class="order-list-item" wx:for="{{filterList}}" wx:for-item="item" wx:key="id">
           <view class="order-list-item-hd">
-            <view class="sn">订单编号:{{item.orderNumber}}</view>
-            <view class="status">{{item.statusStr}}</view>
+            <view class="sn">订单编号：{{item.orderNumber}}</view>
+            <view class="status" wx:if="{{item.pingtuanOpenId}}">拼团中,{{item.statusStr}}</view>
+            <view class="status" wx:else>{{item.statusStr}}</view>
           </view>
           <view class="order-list-item-bd">
-            <block wx:for="{{goodsMap[item.id]}}" wx:for-item="subitem" wx:key="subitem.id">
-              <image src="{{subitem.pic}}"></image>
-              <view>
+            <block wx:for="{{goodsMap[item.id]}}" wx:for-item="subitem" wx:key="id">
+              <div class="thumb">
+                <van-tag mark type="danger" wx:if="{{item.pingtuanOpenId}}">拼团</van-tag>
+                <image src="{{subitem.pic}}"></image>
+              </div>
+              <view class="wrap">
                 <view class="title">{{subitem.goodsName}}</view>
+                <view class="property">{{subitem.property}}</view>
                 <view class="price">￥{{item.amount}}</view>
               </view>
               <view class="number">x1</view>
@@ -19,7 +24,17 @@
           </view>
           <view class="order-list-item-ft">
             <view class="time">{{item.dateAdd}}</view>
-            <view class="total">实付:￥<text>{{item.amount}}</text></view>
+            <view class="total">实付:<text>￥{{item.amountReal}}</text></view>
+          </view>
+          <view class="order-list-operation" wx:if="{{item.pingtuanOpenId && !item.isSuccessPingtuan && item.isPay}}">
+            <view class="btn-pay">邀请好友拼团</view>
+          </view>
+          <view class="order-list-operation" wx:elif="{{item.status == '-1'}}">
+            <view class="btn-pay">重新购买</view>
+          </view>
+          <view class="order-list-operation" wx:else>
+            <view class="btn-cancel">取消订单</view>
+            <view class="btn-pay">去支付</view>
           </view>
         </view>
       </view>

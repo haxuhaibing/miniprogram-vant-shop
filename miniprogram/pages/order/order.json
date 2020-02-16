@@ -1,6 +1,9 @@
 {
   "usingComponents": {
     "van-tab": "/miniprogram_npm/@vant/weapp/tab/index",
-    "van-tabs": "/miniprogram_npm/@vant/weapp/tabs/index"
-  }
+    "van-tabs": "/miniprogram_npm/@vant/weapp/tabs/index",
+    "van-button": "/miniprogram_npm/@vant/weapp/button/index",
+    "van-tag": "/miniprogram_npm/@vant/weapp/tag/index"
+  },
+  "navigationBarTitleText": "订单列表"
 }

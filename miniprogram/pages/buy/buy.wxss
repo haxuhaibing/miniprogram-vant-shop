@@ -87,9 +87,19 @@
   margin-top: 10rpx;
 }
 
+.goods-list-item .thumb {
+  position: relative;
+}
+
 .goods-list-item .thumb image {
   width: 140rpx;
   height: 140rpx;
+}
+
+.goods-list-item .thumb .van-tag {
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
 .goods-list-item .content {

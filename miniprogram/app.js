@@ -11,7 +11,7 @@ App({
         pwd: 123456
       })
       .then(response => {
-        console.log(response)
+    //    console.log(response)
         if (response.code == 0) {
           wx.setStorageSync('token', response.data.token)
           wx.setStorageSync('uid', response.data.uid)

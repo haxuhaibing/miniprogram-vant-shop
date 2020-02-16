@@ -1,5 +1,4 @@
 <view class="container">
-
   <!-- swiper -->
   <swiper class="banner-slide" autoplay="true" interval="5000" duration="1000">
     <swiper-item wx:for="{{bannerList}}" wx:key="id">
@@ -16,7 +15,6 @@
     </view>
   </view>
   <!-- /pintuan -->
-
   <view class="detail-intro mt20">
     <view class="detail-intro-title">{{basicInfo.name}}</view>
     <view class="detail-intro-desc">{{basicInfo.characteristic}}</view>
@@ -36,7 +34,7 @@
       <text>好评:{{basicInfo.numberSells}}</text>
     </view>
   </view>
-  <view class="pintuan-rule mt20">
+  <view class="pintuan-rule mt20" wx:if="{{pintuanList.length>0}}">
     <navigator>
       <view class="hd">
         <view class="name">[多人拼团]</view>
@@ -45,17 +43,17 @@
     </navigator>
     <view class="bd">支付开团邀请一人成团，人数不足自动退款。</view>
   </view>
-  <view class="pindan-participation mt20">
-    <view class="pindan-participation-title">1人在拼单，可直接参与</view>
-    <view class="pindan-participation-item">
+  <view class="pindan-participation mt20" wx:if="{{pintuanList.length>0}}">
+    <view class="pindan-participation-title">{{pintuanList.length}}人在拼单，可直接参与</view>
+    <view class="pindan-participation-item" wx:for="{{pintuanList}}" wx:key="id">
       <view class="hd">
-        <image></image>
-        <text>jjs</text>
+        <image src="{{item.apiExtUser.avatarUrl}}"></image>
+        <text>{{item.apiExtUser.nick}}</text>
       </view>
       <view class="bd">
-        <view class="persion">还差<text>1</text>人拼成</view>
+        <view class="persion">还差<text>{{pintuanInfo.numberPersion - item.helpNumber}}</text>人拼成</view>
         <view class="residue">剩余
-          <van-count-down time="{{ time }}" />
+          <van-count-down time="{{item.time}}" />
         </view>
       </view>
       <view class="ft">
@@ -70,9 +68,11 @@
       <van-cell title="选择" is-link />
     </van-cell-group>
   </view>
+  <!-- 评价 -->
   <view class="goods-evaluate mt20">
-    <van-cell title="评价({{evaluateList.length}})" value="全部内容" is-link link-type="navigateTo" url="/pages/buy/buy" />
-    <view class="goods-evaluate-list">
+    <van-cell wx:if="{{evaluateList.length>0}}" title="评价({{evaluateList.length}})" value="全部评价" is-link link-type="navigateTo" url="/pages/buy/buy" />
+    <van-cell wx:else title="暂无评价" />
+    <view class="goods-evaluate-list" wx:if="{{evaluateList.length>0}}">
       <view class="goods-evaluate-item" wx:for="{{evaluateList}}" wx:key="id">
         <div class="hd">
           <image src="{{item.user.avatarUrl}}"></image>
@@ -86,11 +86,11 @@
       </view>
     </view>
   </view>
+  <!-- /评价 -->
   <view class="detail-content-wrap mt20">
     <view class="headline-title">商品详情</view>
-    <rich-text class="detail-content" nodes="{{content}}"></rich-text>
+    <rich-text class="detail-content" nodes="{{basicInfo.content}}"></rich-text>
   </view>
-
   <!-- sku -->
   <van-popup show="{{ isSku }}" position="bottom" bind:close="onHideSku">
     <view class="detail-sku">
@@ -106,7 +106,7 @@
               ￥{{propertiesPrice.originalPrice}}
             </view>
           </view>
-          <view wx:else class="detail-sku-price">￥{{propertiesPrice.originalPrice}}</view>
+          <view wx:else class="detail-sku-price">￥{{basicInfo.minPrice}}</view>
         </view>
       </view>
       <view class="detail-sku-parameter" wx:for="{{properties}}" wx:for-index="pindex" wx:for-item="parentitem" wx:key="id">
