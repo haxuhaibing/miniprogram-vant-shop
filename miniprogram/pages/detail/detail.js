@@ -19,27 +19,51 @@ Page({
     couponsList: [],
     isCoupons: false,
     pintuanId: '',
-    isPintuan: false,
+    isPintuanSku: false,
     pintuanList: [],
-    pintuanJoiner: []
+    pintuanJoiner: [],
+    goodsType: {}
   },
   onLoad: function(options) {
     let id = options.id;
-    id = 267889; //测试
+    id = 274331; //测试
+    this.getDetail(id);
+  },
+  //获取商品详情
+  getDetail(id) {
     $http.get('/shop/goods/detail', {
         id: id
       })
       .then(response => {
         console.log('获取商品详情', response)
-        let basicInfo = response.data.basicInfo;
-        basicInfo.content = response.data.content.replace(/\<img/gi, '<img style="max-width:100%;height:auto;display:block;"');
         if (response.code == 0) {
+          //判断订单类型
+          if (response.data.basicInfo.pingtuan && response.data.basicInfo.pingtuanPrice > 0) {
+            this.setData({
+              'goodsType.isPintuan': true
+            })
+          }
+           if (response.data.basicInfo.kanjia && response.data.basicInfo.kanjiaPrice > 0) {
+            this.setData({
+              'goodsType.isKanjia': true
+            })
+          }
+          if(response.data.basicInfo.miaosha) {
+            this.setData({
+              'goodsType.isMiaosha': true
+            })
+          }
+          let basicInfo = response.data.basicInfo;
+          basicInfo.content = response.data.content.replace(/\<img/gi, '<img style="max-width:100%;height:auto;display:block;"');
+
+
           this.setData({
             bannerList: response.data.pics || [],
             basicInfo: basicInfo || {},
             properties: response.data.properties || [],
             logistics: response.data.logistics || {}
           })
+
           //is have property
           if (response.properties) {
             let propertyChildIds = [];
@@ -57,7 +81,7 @@ Page({
           }
         }
         //isPintuan
-        if (this.data.basicInfo.pingtuan) {
+        if (this.data.goodsType == 1) {
           //发起拼团
           this.originatePintuan();
           //拼团
@@ -71,28 +95,33 @@ Page({
         this.getCoupons();
       })
   },
+  //是否显示sku
   onShowSku() {
     this.setData({
       isSku: true,
-      isPintuan: false
+      isPintuanSku: false
     })
   },
+  //是否显示拼团sku
   onPintuanSku() {
     this.setData({
       isSku: true,
-      isPintuan: true
+      isPintuanSku: true
     })
   },
+  //隐藏sku
   onHideSku() {
     this.setData({
       isSku: false
     })
   },
+  //修改购买数量
   onCount(value) {
     this.setData({
       number: value.detail
     })
   },
+  //改变属性
   onProperty(event) {
     let index = event.currentTarget.dataset.index;
     let propertyChildIds = this.data.propertyChildIds;
@@ -106,6 +135,7 @@ Page({
     //获取多规格价钱
     this.getPropertiesPrice();
   },
+  //获取拼团数据
   getPingtuan() {
     $http.get('/shop/goods/pingtuan/sets', {
         goodsId: this.data.basicInfo.id
@@ -128,19 +158,20 @@ Page({
         }
       })
   },
+  //获取多规格价钱
   getPropertiesPrice() {
-    //获取多规格价钱
     $http.post('/shop/goods/price', {
         goodsId: this.data.basicInfo.id,
         propertyChildIds: this.data.propertyChildIds
       })
       .then(response => {
-        console.log(response)
+        console.log('获取多规格价钱', response)
         this.setData({
           propertiesPrice: response.data
         })
       })
   },
+  //倒计时结束回调
   onFinishedTime() {
     this.setData({
       time: 0
@@ -216,23 +247,27 @@ Page({
         goodsId: this.data.basicInfo.id
       })
       .then(response => {
-        let data = response.data.result;
-        data = data.map(item => {
-          return {
-            "apiExtUser": item.apiExtUser,
-            "time": new Date(item.dateEnd).getTime() - new Date(item.dateAdd).getTime(),
-            "goodsId": item.goodsId,
-            "helpNumber": item.helpNumber,
-            "id": item.id,
-            "pingtuanId": item.pingtuanId,
-            "status": item.status,
-            "statusStr": item.statusStr,
-            "uid": item.uid
-          }
-        })
-        this.setData({
-          pintuanList: data
-        })
+        console.log('获取可参与拼单列表', response);
+        if (response.code == 0) {
+          let data = response.data.result;
+          data = data.map(item => {
+            return {
+              "apiExtUser": item.apiExtUser,
+              "time": new Date(item.dateEnd).getTime() - new Date(item.dateAdd).getTime(),
+              "goodsId": item.goodsId,
+              "helpNumber": item.helpNumber,
+              "id": item.id,
+              "pingtuanId": item.pingtuanId,
+              "status": item.status,
+              "statusStr": item.statusStr,
+              "uid": item.uid
+            }
+          })
+          this.setData({
+            pintuanList: data
+          })
+        }
+
       })
 
   },
@@ -243,9 +278,11 @@ Page({
       })
       .then(response => {
         console.log('发起拼团', response)
-        this.setData({
-          pintuanId: response.data.id
-        })
+        if (response.code == 0) {
+          this.setData({
+            pintuanId: response.data.id
+          })
+        }
       })
   },
   //提交订单
@@ -258,7 +295,7 @@ Page({
       "logisticsType": 0,
       "inviter_id": ''
     }];
-    if (this.data.basicInfo.pingtuan) {
+    if (this.data.goodsType.isPintuan) {
       data.goodsList = [{
         "pic": this.data.basicInfo.pic,
         "name": this.data.basicInfo.name,
@@ -279,7 +316,7 @@ Page({
     //物流信息
     data.logistics = this.data.logistics;
     //团购订单
-    if (this.data.isPintuan) {
+    if (this.data.goodsType.isPintuan) {
       data.pintuanId = this.data.pintuanId;
     }
     wx.setStorageSync('creatOrder', data);

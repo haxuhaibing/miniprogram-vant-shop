@@ -1,0 +1,3 @@
+*.js linguist-language=weapp
+*.css linguist-language=weapp
+*.html linguist-language=weapp
